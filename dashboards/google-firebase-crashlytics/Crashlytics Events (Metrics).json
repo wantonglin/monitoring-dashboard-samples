@@ -1,0 +1,286 @@
+{
+  "displayName": "Crashlytics Events (Metrics)",
+  "category": "CUSTOM",
+  "etag": "3494fd0c55be8121f6aec15b35f510dd",
+  "description": "",
+  "mosaicLayout": {
+    "columns": 48,
+    "tiles": [
+      {
+        "xPos": 0,
+        "yPos": 16,
+        "width": 24,
+        "height": 16,
+        "widget": {
+          "xyChart": {
+            "dataSets": [
+              {
+                "timeSeriesQuery": {
+                  "timeSeriesFilter": null,
+                  "timeSeriesFilterRatio": null,
+                  "timeSeriesQueryLanguage": "fetch logging_bucket\n| metric 'logging.googleapis.com/user/firebase/crashlytics_events'\n| align rate(30m)\n| every 10m\n| group_by [metric.errorType],\n    [value_crashlytics_events_aggregate: aggregate(value.crashlytics_events)]",
+                  "prometheusQuery": null,
+                  "opsAnalyticsQuery": null,
+                  "bigQueryQuery": null,
+                  "traceQuery": null,
+                  "appHubQuery": null,
+                  "alertingQuery": null,
+                  "billingQuery": null,
+                  "demoQuery": null,
+                  "topologyQuery": null,
+                  "costUtilizationQuery": null,
+                  "activeResourceTypesQuery": null,
+                  "apiHubInsightsQuery": null,
+                  "serviceHealthEventsQuery": null,
+                  "apiSource": "DEFAULT_CLOUD",
+                  "unitOverride": "",
+                  "outputFullDuration": false
+                },
+                "plotType": "LINE",
+                "legendTemplate": "",
+                "minAlignmentPeriod": null,
+                "targetAxis": "Y1",
+                "dimensions": [],
+                "measures": [],
+                "breakdowns": []
+              }
+            ],
+            "timeshiftDuration": null,
+            "thresholds": [],
+            "xAxis": null,
+            "yAxis": {
+              "label": "",
+              "scale": "LINEAR"
+            },
+            "y2Axis": null,
+            "chartOptions": {
+              "mode": "COLOR",
+              "showLegend": false,
+              "sortingOptions": null,
+              "displayHorizontal": false
+            }
+          },
+          "title": "All Crashlytics Events (from log based metrics)",
+          "blank": null,
+          "collapsibleGroup": null,
+          "clientComponent": null,
+          "resourceList": null,
+          "sectionHeader": null,
+          "singleViewGroup": null,
+          "serviceIntent": null,
+          "frontendAddition": null,
+          "id": ""
+        }
+      },
+      {
+        "xPos": 0,
+        "yPos": 0,
+        "width": 24,
+        "height": 16,
+        "widget": {
+          "xyChart": {
+            "dataSets": [
+              {
+                "timeSeriesQuery": {
+                  "timeSeriesFilter": null,
+                  "timeSeriesFilterRatio": null,
+                  "timeSeriesQueryLanguage": "fetch logging_bucket\n| metric 'logging.googleapis.com/user/firebase/session_events'\n| align rate(30m)\n| every 10m\n| group_by [metric.eventType], [value_session_events_aggregate: aggregate(value.session_events)]",
+                  "prometheusQuery": null,
+                  "opsAnalyticsQuery": null,
+                  "bigQueryQuery": null,
+                  "traceQuery": null,
+                  "appHubQuery": null,
+                  "alertingQuery": null,
+                  "billingQuery": null,
+                  "demoQuery": null,
+                  "topologyQuery": null,
+                  "costUtilizationQuery": null,
+                  "activeResourceTypesQuery": null,
+                  "apiHubInsightsQuery": null,
+                  "serviceHealthEventsQuery": null,
+                  "apiSource": "DEFAULT_CLOUD",
+                  "unitOverride": "",
+                  "outputFullDuration": false
+                },
+                "plotType": "LINE",
+                "legendTemplate": "",
+                "minAlignmentPeriod": null,
+                "targetAxis": "Y1",
+                "dimensions": [],
+                "measures": [],
+                "breakdowns": []
+              }
+            ],
+            "timeshiftDuration": null,
+            "thresholds": [],
+            "xAxis": null,
+            "yAxis": {
+              "label": "",
+              "scale": "LINEAR"
+            },
+            "y2Axis": null,
+            "chartOptions": {
+              "mode": "COLOR",
+              "showLegend": false,
+              "sortingOptions": null,
+              "displayHorizontal": false
+            }
+          },
+          "title": "Firebase Sessions (from log based metrics)",
+          "blank": null,
+          "collapsibleGroup": null,
+          "clientComponent": null,
+          "resourceList": null,
+          "sectionHeader": null,
+          "singleViewGroup": null,
+          "serviceIntent": null,
+          "frontendAddition": null,
+          "id": ""
+        }
+      },
+      {
+        "xPos": 24,
+        "yPos": 0,
+        "width": 24,
+        "height": 16,
+        "widget": {
+          "xyChart": {
+            "dataSets": [
+              {
+                "timeSeriesQuery": {
+                  "timeSeriesFilter": null,
+                  "timeSeriesFilterRatio": null,
+                  "timeSeriesQueryLanguage": "fetch logging_bucket\n| { t_0:\n      metric 'logging.googleapis.com/user/firebase/crashlytics_events'\n      | filter (metric.errorType == 'FATAL')\n      | align rate(30m)\n      | every 10m\n      | group_by [],\n          [value_crashlytics_events_aggregate:\n             aggregate(value.crashlytics_events)]\n  ; t_1:\n      metric 'logging.googleapis.com/user/firebase/session_events'\n      | filter (metric.eventType == 'SESSION_START')\n      | align rate(30m)\n      | every 10m\n      | group_by [],\n          [value_session_events_aggregate: aggregate(value.session_events)] }\n| outer_join 0\n| div\n| add [p: 'crash ratio'] | map [p]\n",
+                  "prometheusQuery": null,
+                  "opsAnalyticsQuery": null,
+                  "bigQueryQuery": null,
+                  "traceQuery": null,
+                  "appHubQuery": null,
+                  "alertingQuery": null,
+                  "billingQuery": null,
+                  "demoQuery": null,
+                  "topologyQuery": null,
+                  "costUtilizationQuery": null,
+                  "activeResourceTypesQuery": null,
+                  "apiHubInsightsQuery": null,
+                  "serviceHealthEventsQuery": null,
+                  "apiSource": "DEFAULT_CLOUD",
+                  "unitOverride": "",
+                  "outputFullDuration": false
+                },
+                "plotType": "LINE",
+                "legendTemplate": "",
+                "minAlignmentPeriod": null,
+                "targetAxis": "Y1",
+                "dimensions": [],
+                "measures": [],
+                "breakdowns": []
+              }
+            ],
+            "timeshiftDuration": null,
+            "thresholds": [],
+            "xAxis": null,
+            "yAxis": {
+              "label": "",
+              "scale": "LINEAR"
+            },
+            "y2Axis": null,
+            "chartOptions": {
+              "mode": "COLOR",
+              "showLegend": false,
+              "sortingOptions": null,
+              "displayHorizontal": false
+            }
+          },
+          "title": "Crash Rate (from metrics)",
+          "blank": null,
+          "collapsibleGroup": null,
+          "clientComponent": null,
+          "resourceList": null,
+          "sectionHeader": null,
+          "singleViewGroup": null,
+          "serviceIntent": null,
+          "frontendAddition": null,
+          "id": ""
+        }
+      },
+      {
+        "xPos": 24,
+        "yPos": 16,
+        "width": 24,
+        "height": 16,
+        "widget": {
+          "xyChart": {
+            "dataSets": [
+              {
+                "timeSeriesQuery": {
+                  "timeSeriesFilter": null,
+                  "timeSeriesFilterRatio": null,
+                  "timeSeriesQueryLanguage": "fetch logging_bucket\n| { t_0:\n      metric 'logging.googleapis.com/user/firebase/crashlytics_events'\n      | filter (metric.errorType == 'FATAL')\n      | align rate(30m)\n      | every 10m\n      | group_by [],\n          [value_crashlytics_events_aggregate:\n             aggregate(value.crashlytics_events)]\n  ; t_1:\n      metric 'logging.googleapis.com/user/firebase/session_events'\n      | filter (metric.eventType == 'SESSION_START')\n      | align rate(30m)\n      | every 10m\n      | group_by [],\n          [value_session_events_aggregate: aggregate(value.session_events)] }\n| outer_join 0\n| div\n| add [p: 'crash ratio'] | map [p]\n| condition val() > 0.3\n",
+                  "prometheusQuery": null,
+                  "opsAnalyticsQuery": null,
+                  "bigQueryQuery": null,
+                  "traceQuery": null,
+                  "appHubQuery": null,
+                  "alertingQuery": null,
+                  "billingQuery": null,
+                  "demoQuery": null,
+                  "topologyQuery": null,
+                  "costUtilizationQuery": null,
+                  "activeResourceTypesQuery": null,
+                  "apiHubInsightsQuery": null,
+                  "serviceHealthEventsQuery": null,
+                  "apiSource": "DEFAULT_CLOUD",
+                  "unitOverride": "",
+                  "outputFullDuration": false
+                },
+                "plotType": "LINE",
+                "legendTemplate": "",
+                "minAlignmentPeriod": null,
+                "targetAxis": "Y1",
+                "dimensions": [],
+                "measures": [],
+                "breakdowns": []
+              }
+            ],
+            "timeshiftDuration": null,
+            "thresholds": [
+              {
+                "label": "",
+                "value": 0.3,
+                "color": "COLOR_UNSPECIFIED",
+                "direction": "DIRECTION_UNSPECIFIED",
+                "targetAxis": "Y1"
+              }
+            ],
+            "xAxis": {
+              "label": "",
+              "scale": "LINEAR"
+            },
+            "yAxis": null,
+            "y2Axis": null,
+            "chartOptions": {
+              "mode": "COLOR",
+              "showLegend": true,
+              "sortingOptions": null,
+              "displayHorizontal": false
+            }
+          },
+          "title": "Alert on Crash Rate",
+          "blank": null,
+          "collapsibleGroup": null,
+          "clientComponent": null,
+          "resourceList": null,
+          "sectionHeader": null,
+          "singleViewGroup": null,
+          "serviceIntent": null,
+          "frontendAddition": null,
+          "id": ""
+        }
+      }
+    ]
+  },
+  "dashboardFilters": [],
+  "annotations": null,
+  "labels": {}
+}

@@ -1,0 +1,467 @@
+{
+  "displayName": "Crashlytics Events (Analytics)",
+  "category": "CUSTOM",
+  "etag": "4255122b2eb8867af9e0e77371e064e2",
+  "description": "",
+  "mosaicLayout": {
+    "columns": 48,
+    "tiles": [
+      {
+        "xPos": 24,
+        "yPos": 0,
+        "width": 24,
+        "height": 16,
+        "widget": {
+          "xyChart": {
+            "dataSets": [
+              {
+                "timeSeriesQuery": {
+                  "timeSeriesFilter": null,
+                  "timeSeriesFilterRatio": null,
+                  "timeSeriesQueryLanguage": null,
+                  "prometheusQuery": null,
+                  "opsAnalyticsQuery": {
+                    "savedQueryId": "",
+                    "sql": "SELECT\n  *\nFROM\n  `analytics_view.fb-io-2024.global.CrashlyticsEventsView` AS CrashlyticsEvents;",
+                    "queryHandle": "",
+                    "queryExecutionRules": {
+                      "useReservedSlots": false
+                    },
+                    "queryBuilder": null
+                  },
+                  "bigQueryQuery": null,
+                  "traceQuery": null,
+                  "appHubQuery": null,
+                  "alertingQuery": null,
+                  "billingQuery": null,
+                  "demoQuery": null,
+                  "topologyQuery": null,
+                  "costUtilizationQuery": null,
+                  "activeResourceTypesQuery": null,
+                  "apiHubInsightsQuery": null,
+                  "serviceHealthEventsQuery": null,
+                  "apiSource": "DEFAULT_CLOUD",
+                  "unitOverride": "",
+                  "outputFullDuration": false
+                },
+                "plotType": "LINE",
+                "legendTemplate": "",
+                "minAlignmentPeriod": null,
+                "targetAxis": "Y1",
+                "dimensions": [
+                  {
+                    "column": "timestamp",
+                    "columnType": "TIMESTAMP",
+                    "timeBinSize": "0s",
+                    "numericBinSize": null,
+                    "floatBinSize": null,
+                    "maxBinCount": 0,
+                    "sortOrder": "SORT_ORDER_ASCENDING",
+                    "sortColumn": "timestamp"
+                  }
+                ],
+                "measures": [
+                  {
+                    "column": "",
+                    "aggregationFunction": {
+                      "type": "count",
+                      "parameters": []
+                    }
+                  }
+                ],
+                "breakdowns": [
+                  {
+                    "column": "errorType",
+                    "limit": 5,
+                    "aggregationFunction": {
+                      "type": "count",
+                      "parameters": []
+                    },
+                    "sortOrder": "SORT_ORDER_DESCENDING"
+                  }
+                ]
+              }
+            ],
+            "timeshiftDuration": null,
+            "thresholds": [],
+            "xAxis": null,
+            "yAxis": {
+              "label": "",
+              "scale": "LINEAR"
+            },
+            "y2Axis": null,
+            "chartOptions": {
+              "mode": "COLOR",
+              "showLegend": false,
+              "sortingOptions": null,
+              "displayHorizontal": false
+            }
+          },
+          "title": "Crashlytics Events (from logs analytics)",
+          "blank": null,
+          "collapsibleGroup": null,
+          "clientComponent": null,
+          "resourceList": null,
+          "sectionHeader": null,
+          "singleViewGroup": null,
+          "serviceIntent": null,
+          "frontendAddition": null,
+          "id": ""
+        }
+      },
+      {
+        "xPos": 24,
+        "yPos": 16,
+        "width": 24,
+        "height": 16,
+        "widget": {
+          "timeSeriesTable": {
+            "dataSets": [
+              {
+                "timeSeriesQuery": {
+                  "timeSeriesFilter": null,
+                  "timeSeriesFilterRatio": null,
+                  "timeSeriesQueryLanguage": null,
+                  "prometheusQuery": null,
+                  "opsAnalyticsQuery": {
+                    "savedQueryId": "",
+                    "sql": "SELECT\n  COUNT(*) AS events_count,\n  issueId,\n  appDisplayVersion,\n  errorType\nFROM\n  `analytics_view.fb-io-2024.global.CrashlyticsEventsView` AS CrashlyticsEvents\nGROUP BY appDisplayVersion, errorType, issueId\nORDER BY events_count DESC;",
+                    "queryHandle": "CghBsck5mhR9qxIgam9iX1pkYWZETE1uWnhjNldvWW9QTjE5MXIweXlIZS0aAlVTQM_sl5aNGQ",
+                    "queryExecutionRules": null,
+                    "queryBuilder": null
+                  },
+                  "bigQueryQuery": null,
+                  "traceQuery": null,
+                  "appHubQuery": null,
+                  "alertingQuery": null,
+                  "billingQuery": null,
+                  "demoQuery": null,
+                  "topologyQuery": null,
+                  "costUtilizationQuery": null,
+                  "activeResourceTypesQuery": null,
+                  "apiHubInsightsQuery": null,
+                  "serviceHealthEventsQuery": null,
+                  "apiSource": "DEFAULT_CLOUD",
+                  "unitOverride": "",
+                  "outputFullDuration": false
+                },
+                "tableTemplate": "",
+                "minAlignmentPeriod": null,
+                "breakdowns": [],
+                "secondary": false
+              }
+            ],
+            "metricVisualization": "NUMBER",
+            "sortingOptions": null,
+            "columnSettings": [],
+            "opsAnalyticsSettings": {
+              "maxRows": "0",
+              "showFilterBar": false,
+              "pageSize": "0"
+            },
+            "displayColumnType": false,
+            "rowSelection": "ROW_SELECTION_UNSPECIFIED"
+          },
+          "title": "Top Issues (from logs analytics)",
+          "blank": null,
+          "collapsibleGroup": null,
+          "clientComponent": null,
+          "resourceList": null,
+          "sectionHeader": null,
+          "singleViewGroup": null,
+          "serviceIntent": null,
+          "frontendAddition": null,
+          "id": ""
+        }
+      },
+      {
+        "xPos": 0,
+        "yPos": 16,
+        "width": 24,
+        "height": 16,
+        "widget": {
+          "xyChart": {
+            "dataSets": [
+              {
+                "timeSeriesQuery": {
+                  "timeSeriesFilter": null,
+                  "timeSeriesFilterRatio": null,
+                  "timeSeriesQueryLanguage": null,
+                  "prometheusQuery": null,
+                  "opsAnalyticsQuery": {
+                    "savedQueryId": "",
+                    "sql": "# Calculate Crash Free Sessions\n\nWITH SessionCounts AS (\nSELECT\n  COUNT(*) AS session_count,\n  TIMESTAMP_TRUNC(FirebaseSessionEventsView.timestamp, HOUR) AS hour\nFROM\n  `analytics_view.fb-io-2024.global.FirebaseSessionEventsView` AS FirebaseSessionEventsView\nGROUP BY hour),\n\nCrashCounts AS (\nSELECT\n  COUNT(*) AS crash_count,\n  TIMESTAMP_TRUNC(CrashlyticsEventsView.timestamp, HOUR) AS hour\nFROM\n  `analytics_view.fb-io-2024.global.CrashlyticsEventsView` AS CrashlyticsEventsView\nWHERE \n  errorType = \"FATAL\"\nGROUP BY hour)\n\nSELECT \n  SessionCounts.hour,\n  SessionCounts.session_count,\n  CrashCounts.crash_count,\n  ROUND((1.0 - (CrashCounts.crash_count / SessionCounts.session_count)) * 100.0, 2) AS crash_free_sessions\nFROM SessionCounts\nLEFT JOIN CrashCounts ON (SessionCounts.hour = CrashCounts.hour)\nORDER BY hour ASC;\n",
+                    "queryHandle": "",
+                    "queryExecutionRules": null,
+                    "queryBuilder": null
+                  },
+                  "bigQueryQuery": null,
+                  "traceQuery": null,
+                  "appHubQuery": null,
+                  "alertingQuery": null,
+                  "billingQuery": null,
+                  "demoQuery": null,
+                  "topologyQuery": null,
+                  "costUtilizationQuery": null,
+                  "activeResourceTypesQuery": null,
+                  "apiHubInsightsQuery": null,
+                  "serviceHealthEventsQuery": null,
+                  "apiSource": "DEFAULT_CLOUD",
+                  "unitOverride": "",
+                  "outputFullDuration": false
+                },
+                "plotType": "LINE",
+                "legendTemplate": "",
+                "minAlignmentPeriod": null,
+                "targetAxis": "Y1",
+                "dimensions": [
+                  {
+                    "column": "hour",
+                    "columnType": "TIMESTAMP",
+                    "timeBinSize": null,
+                    "numericBinSize": null,
+                    "floatBinSize": null,
+                    "maxBinCount": 0,
+                    "sortOrder": "SORT_ORDER_NONE",
+                    "sortColumn": "hour"
+                  }
+                ],
+                "measures": [
+                  {
+                    "column": "crash_free_sessions",
+                    "aggregationFunction": {
+                      "type": "none",
+                      "parameters": []
+                    }
+                  }
+                ],
+                "breakdowns": []
+              }
+            ],
+            "timeshiftDuration": null,
+            "thresholds": [],
+            "xAxis": null,
+            "yAxis": {
+              "label": "",
+              "scale": "LINEAR"
+            },
+            "y2Axis": null,
+            "chartOptions": {
+              "mode": "COLOR",
+              "showLegend": false,
+              "sortingOptions": null,
+              "displayHorizontal": false
+            }
+          },
+          "title": "Crash Free Sessions Percentage (from logs analytics)",
+          "blank": null,
+          "collapsibleGroup": null,
+          "clientComponent": null,
+          "resourceList": null,
+          "sectionHeader": null,
+          "singleViewGroup": null,
+          "serviceIntent": null,
+          "frontendAddition": null,
+          "id": ""
+        }
+      },
+      {
+        "xPos": 0,
+        "yPos": 0,
+        "width": 24,
+        "height": 16,
+        "widget": {
+          "xyChart": {
+            "dataSets": [
+              {
+                "timeSeriesQuery": {
+                  "timeSeriesFilter": null,
+                  "timeSeriesFilterRatio": null,
+                  "timeSeriesQueryLanguage": null,
+                  "prometheusQuery": null,
+                  "opsAnalyticsQuery": {
+                    "savedQueryId": "",
+                    "sql": "\nSELECT\n  *\nFROM\n  `analytics_view.fb-io-2024.global.FirebaseSessionEventsView` AS FirebaseSessionEventsView;\n\n",
+                    "queryHandle": "",
+                    "queryExecutionRules": null,
+                    "queryBuilder": null
+                  },
+                  "bigQueryQuery": null,
+                  "traceQuery": null,
+                  "appHubQuery": null,
+                  "alertingQuery": null,
+                  "billingQuery": null,
+                  "demoQuery": null,
+                  "topologyQuery": null,
+                  "costUtilizationQuery": null,
+                  "activeResourceTypesQuery": null,
+                  "apiHubInsightsQuery": null,
+                  "serviceHealthEventsQuery": null,
+                  "apiSource": "DEFAULT_CLOUD",
+                  "unitOverride": "",
+                  "outputFullDuration": false
+                },
+                "plotType": "LINE",
+                "legendTemplate": "",
+                "minAlignmentPeriod": null,
+                "targetAxis": "Y1",
+                "dimensions": [
+                  {
+                    "column": "timestamp",
+                    "columnType": "TIMESTAMP",
+                    "timeBinSize": "0s",
+                    "numericBinSize": null,
+                    "floatBinSize": null,
+                    "maxBinCount": 0,
+                    "sortOrder": "SORT_ORDER_ASCENDING",
+                    "sortColumn": "timestamp"
+                  }
+                ],
+                "measures": [
+                  {
+                    "column": "",
+                    "aggregationFunction": {
+                      "type": "count",
+                      "parameters": []
+                    }
+                  }
+                ],
+                "breakdowns": [
+                  {
+                    "column": "eventType",
+                    "limit": 5,
+                    "aggregationFunction": {
+                      "type": "count",
+                      "parameters": []
+                    },
+                    "sortOrder": "SORT_ORDER_DESCENDING"
+                  }
+                ]
+              }
+            ],
+            "timeshiftDuration": null,
+            "thresholds": [],
+            "xAxis": null,
+            "yAxis": {
+              "label": "",
+              "scale": "LINEAR"
+            },
+            "y2Axis": null,
+            "chartOptions": {
+              "mode": "COLOR",
+              "showLegend": false,
+              "sortingOptions": null,
+              "displayHorizontal": false
+            }
+          },
+          "title": "Firebase Sessions (from logs analytics)",
+          "blank": null,
+          "collapsibleGroup": null,
+          "clientComponent": null,
+          "resourceList": null,
+          "sectionHeader": null,
+          "singleViewGroup": null,
+          "serviceIntent": null,
+          "frontendAddition": null,
+          "id": ""
+        }
+      },
+      {
+        "xPos": 0,
+        "yPos": 32,
+        "width": 24,
+        "height": 16,
+        "widget": {
+          "xyChart": {
+            "dataSets": [
+              {
+                "timeSeriesQuery": {
+                  "timeSeriesFilter": null,
+                  "timeSeriesFilterRatio": null,
+                  "timeSeriesQueryLanguage": null,
+                  "prometheusQuery": null,
+                  "opsAnalyticsQuery": {
+                    "savedQueryId": "",
+                    "sql": "SELECT\n  timestamp,  \n  JSON_VALUE(json_payload, \"$.eventId\") AS eventId, \n  JSON_VALUE(json_payload, \"$.issue.id\") AS issueId, \n  JSON_VALUE(json_payload, \"$.issue.title\") AS issueTitle,\n  JSON_VALUE(json_payload, \"$.issue.subtitle\") AS issueSubtitle,\nFROM\n  `fb-io-2024.global._Default._Default`\nWHERE\n  log_name = \"projects/fb-io-2024/logs/firebasecrashlytics.googleapis.com%2Fevents\"\n  AND JSON_VALUE(json_payload, \"$.issue.subtitle\") LIKE '%Credit%'",
+                    "queryHandle": "",
+                    "queryExecutionRules": null,
+                    "queryBuilder": null
+                  },
+                  "bigQueryQuery": null,
+                  "traceQuery": null,
+                  "appHubQuery": null,
+                  "alertingQuery": null,
+                  "billingQuery": null,
+                  "demoQuery": null,
+                  "topologyQuery": null,
+                  "costUtilizationQuery": null,
+                  "activeResourceTypesQuery": null,
+                  "apiHubInsightsQuery": null,
+                  "serviceHealthEventsQuery": null,
+                  "apiSource": "DEFAULT_CLOUD",
+                  "unitOverride": "",
+                  "outputFullDuration": false
+                },
+                "plotType": "STACKED_AREA",
+                "legendTemplate": "",
+                "minAlignmentPeriod": null,
+                "targetAxis": "Y1",
+                "dimensions": [
+                  {
+                    "column": "timestamp",
+                    "columnType": "TIMESTAMP",
+                    "timeBinSize": "0s",
+                    "numericBinSize": null,
+                    "floatBinSize": null,
+                    "maxBinCount": 0,
+                    "sortOrder": "SORT_ORDER_ASCENDING",
+                    "sortColumn": "timestamp"
+                  }
+                ],
+                "measures": [
+                  {
+                    "column": "",
+                    "aggregationFunction": {
+                      "type": "count",
+                      "parameters": []
+                    }
+                  }
+                ],
+                "breakdowns": []
+              }
+            ],
+            "timeshiftDuration": null,
+            "thresholds": [],
+            "xAxis": null,
+            "yAxis": {
+              "label": "",
+              "scale": "LINEAR"
+            },
+            "y2Axis": null,
+            "chartOptions": {
+              "mode": "COLOR",
+              "showLegend": false,
+              "sortingOptions": null,
+              "displayHorizontal": false
+            }
+          },
+          "title": "Crashes During Payment",
+          "blank": null,
+          "collapsibleGroup": null,
+          "clientComponent": null,
+          "resourceList": null,
+          "sectionHeader": null,
+          "singleViewGroup": null,
+          "serviceIntent": null,
+          "frontendAddition": null,
+          "id": ""
+        }
+      }
+    ]
+  },
+  "dashboardFilters": [],
+  "annotations": null,
+  "labels": {
+    "cloud_next_demo": ""
+  }
+}

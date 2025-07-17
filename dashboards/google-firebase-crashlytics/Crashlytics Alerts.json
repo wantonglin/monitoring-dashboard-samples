@@ -1,0 +1,260 @@
+{
+  "displayName": "Crashlytics Alerts",
+  "category": "CUSTOM",
+  "etag": "1b3a36ba67835985208d9a004d6bbd48",
+  "description": "",
+  "mosaicLayout": {
+    "columns": 48,
+    "tiles": [
+      {
+        "xPos": 0,
+        "yPos": 0,
+        "width": 24,
+        "height": 16,
+        "widget": {
+          "alertChart": {
+            "name": "projects/fb-io-2024/alertPolicies/16301675185980661706"
+          },
+          "title": "",
+          "blank": null,
+          "collapsibleGroup": null,
+          "clientComponent": null,
+          "resourceList": null,
+          "sectionHeader": null,
+          "singleViewGroup": null,
+          "serviceIntent": null,
+          "frontendAddition": null,
+          "id": ""
+        }
+      },
+      {
+        "xPos": 24,
+        "yPos": 0,
+        "width": 24,
+        "height": 16,
+        "widget": {
+          "alertChart": {
+            "name": "projects/fb-io-2024/alertPolicies/3008114973964922885"
+          },
+          "title": "",
+          "blank": null,
+          "collapsibleGroup": null,
+          "clientComponent": null,
+          "resourceList": null,
+          "sectionHeader": null,
+          "singleViewGroup": null,
+          "serviceIntent": null,
+          "frontendAddition": null,
+          "id": ""
+        }
+      },
+      {
+        "xPos": 24,
+        "yPos": 16,
+        "width": 24,
+        "height": 16,
+        "widget": {
+          "xyChart": {
+            "dataSets": [
+              {
+                "timeSeriesQuery": {
+                  "timeSeriesFilter": null,
+                  "timeSeriesFilterRatio": null,
+                  "timeSeriesQueryLanguage": null,
+                  "prometheusQuery": null,
+                  "opsAnalyticsQuery": {
+                    "savedQueryId": "",
+                    "sql": "SELECT\n  timestamp,  \n  JSON_VALUE(json_payload, \"$.eventId\") AS eventId, \n  JSON_VALUE(json_payload, \"$.issue.id\") AS issueId, \n  JSON_VALUE(json_payload, \"$.issue.title\") AS issueTitle,\n  JSON_VALUE(json_payload, \"$.issue.subtitle\") AS issueSubtitle,\nFROM\n  `fb-io-2024.global._Default._Default`\nWHERE\n  log_name = \"projects/fb-io-2024/logs/firebasecrashlytics.googleapis.com%2Fevents\"\n  AND SEARCH(JSON_VALUE(json_payload, \"$.issue.subtitle\"), \"CreditCardProcessingException\");",
+                    "queryHandle": "",
+                    "queryExecutionRules": null,
+                    "queryBuilder": null
+                  },
+                  "bigQueryQuery": null,
+                  "traceQuery": null,
+                  "appHubQuery": null,
+                  "alertingQuery": null,
+                  "billingQuery": null,
+                  "demoQuery": null,
+                  "topologyQuery": null,
+                  "costUtilizationQuery": null,
+                  "activeResourceTypesQuery": null,
+                  "apiHubInsightsQuery": null,
+                  "serviceHealthEventsQuery": null,
+                  "apiSource": "DEFAULT_CLOUD",
+                  "unitOverride": "",
+                  "outputFullDuration": false
+                },
+                "plotType": "LINE",
+                "legendTemplate": "",
+                "minAlignmentPeriod": null,
+                "targetAxis": "Y1",
+                "dimensions": [
+                  {
+                    "column": "timestamp",
+                    "columnType": "TIMESTAMP",
+                    "timeBinSize": "0s",
+                    "numericBinSize": null,
+                    "floatBinSize": null,
+                    "maxBinCount": 0,
+                    "sortOrder": "SORT_ORDER_ASCENDING",
+                    "sortColumn": "timestamp"
+                  }
+                ],
+                "measures": [
+                  {
+                    "column": "",
+                    "aggregationFunction": {
+                      "type": "count",
+                      "parameters": []
+                    }
+                  }
+                ],
+                "breakdowns": [
+                  {
+                    "column": "issueSubtitle",
+                    "limit": 5,
+                    "aggregationFunction": {
+                      "type": "count",
+                      "parameters": []
+                    },
+                    "sortOrder": "SORT_ORDER_DESCENDING"
+                  }
+                ]
+              }
+            ],
+            "timeshiftDuration": null,
+            "thresholds": [],
+            "xAxis": null,
+            "yAxis": {
+              "label": "",
+              "scale": "LINEAR"
+            },
+            "y2Axis": null,
+            "chartOptions": {
+              "mode": "COLOR",
+              "showLegend": false,
+              "sortingOptions": null,
+              "displayHorizontal": false
+            }
+          },
+          "title": "Critical Exceptions in Credit Card Processing",
+          "blank": null,
+          "collapsibleGroup": null,
+          "clientComponent": null,
+          "resourceList": null,
+          "sectionHeader": null,
+          "singleViewGroup": null,
+          "serviceIntent": null,
+          "frontendAddition": null,
+          "id": ""
+        }
+      },
+      {
+        "xPos": 0,
+        "yPos": 16,
+        "width": 24,
+        "height": 16,
+        "widget": {
+          "xyChart": {
+            "dataSets": [
+              {
+                "timeSeriesQuery": {
+                  "timeSeriesFilter": null,
+                  "timeSeriesFilterRatio": null,
+                  "timeSeriesQueryLanguage": null,
+                  "prometheusQuery": null,
+                  "opsAnalyticsQuery": {
+                    "savedQueryId": "",
+                    "sql": "# Query to join crashes with analytics events\n\n# All events by eventId\n\nWITH CrashlyticsEvents AS (\nSELECT\n  timestamp, \n  JSON_VALUE(json_payload, \"$.eventId\") AS eventId, \nFROM\n  `fb-io-2024.global._Default._Default`\nWHERE\n  log_name = \"projects/fb-io-2024/logs/firebasecrashlytics.googleapis.com%2Fevents\"\n),\n\n# Events which contain the \"UpgradePaymentActivity\" analytics breadcrumb\n\nPaymentBreadcrumb AS (\nSELECT \n  MAX(timestamp),\n  JSON_VALUE(json_payload, \"$.eventId\") AS eventId,\n  \"UpgradePaymentActivity\" AS breadcrumb,\nFROM\n  `fb-io-2024.global._Default._Default`\nWHERE\n  log_name = \"projects/fb-io-2024/logs/firebasecrashlytics.googleapis.com%2Fdevice_logs\"\n  AND JSON_VALUE(json_payload, \"$.breadcrumb.params.firebase_screen_class\") = \"UpgradePaymentActivity\"\nGROUP BY eventId\n)\n\nSELECT \n  CrashlyticsEvents.timestamp,\n  CrashlyticsEvents.eventId,\n  PaymentBreadcrumb.breadcrumb as breadcrumb\nFROM CrashlyticsEvents\nJOIN PaymentBreadcrumb ON (CrashlyticsEvents.eventId = PaymentBreadcrumb.eventId);\n",
+                    "queryHandle": "",
+                    "queryExecutionRules": null,
+                    "queryBuilder": null
+                  },
+                  "bigQueryQuery": null,
+                  "traceQuery": null,
+                  "appHubQuery": null,
+                  "alertingQuery": null,
+                  "billingQuery": null,
+                  "demoQuery": null,
+                  "topologyQuery": null,
+                  "costUtilizationQuery": null,
+                  "activeResourceTypesQuery": null,
+                  "apiHubInsightsQuery": null,
+                  "serviceHealthEventsQuery": null,
+                  "apiSource": "DEFAULT_CLOUD",
+                  "unitOverride": "",
+                  "outputFullDuration": false
+                },
+                "plotType": "LINE",
+                "legendTemplate": "",
+                "minAlignmentPeriod": null,
+                "targetAxis": "Y1",
+                "dimensions": [
+                  {
+                    "column": "timestamp",
+                    "columnType": "TIMESTAMP",
+                    "timeBinSize": "0s",
+                    "numericBinSize": null,
+                    "floatBinSize": null,
+                    "maxBinCount": 0,
+                    "sortOrder": "SORT_ORDER_ASCENDING",
+                    "sortColumn": "timestamp"
+                  }
+                ],
+                "measures": [
+                  {
+                    "column": "",
+                    "aggregationFunction": {
+                      "type": "count",
+                      "parameters": []
+                    }
+                  }
+                ],
+                "breakdowns": [
+                  {
+                    "column": "breadcrumb",
+                    "limit": 5,
+                    "aggregationFunction": {
+                      "type": "count",
+                      "parameters": []
+                    },
+                    "sortOrder": "SORT_ORDER_DESCENDING"
+                  }
+                ]
+              }
+            ],
+            "timeshiftDuration": null,
+            "thresholds": [],
+            "xAxis": null,
+            "yAxis": {
+              "label": "",
+              "scale": "LINEAR"
+            },
+            "y2Axis": null,
+            "chartOptions": {
+              "mode": "COLOR",
+              "showLegend": false,
+              "sortingOptions": null,
+              "displayHorizontal": false
+            }
+          },
+          "title": "Crashes on the UpgradePaymentActivity screen",
+          "blank": null,
+          "collapsibleGroup": null,
+          "clientComponent": null,
+          "resourceList": null,
+          "sectionHeader": null,
+          "singleViewGroup": null,
+          "serviceIntent": null,
+          "frontendAddition": null,
+          "id": ""
+        }
+      }
+    ]
+  },
+  "dashboardFilters": [],
+  "annotations": null,
+  "labels": {
+    "cloud_next_demo": ""
+  }
+}
