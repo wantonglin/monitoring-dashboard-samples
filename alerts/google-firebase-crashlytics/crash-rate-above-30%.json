@@ -1,0 +1,27 @@
+{
+  "displayName": "Crash Rate above 30%",
+  "documentation": {
+    "subject": "Crash Rate Above 30% Yikes!"
+  },
+  "userLabels": {},
+  "conditions": [
+    {
+      "displayName": "Crash rate above 30%",
+      "conditionMonitoringQueryLanguage": {
+        "duration": "0s",
+        "query": "fetch logging_bucket\n| { t_0:\n      metric 'logging.googleapis.com/user/firebase/crashlytics_events'\n      | filter (metric.errorType == 'FATAL')\n      | align rate(30m)\n      | every 10m\n      | group_by [],\n          [value_crashlytics_events_aggregate:\n             aggregate(value.crashlytics_events)]\n  ; t_1:\n      metric 'logging.googleapis.com/user/firebase/session_events'\n      | filter (metric.eventType == 'SESSION_START')\n      | align rate(30m)\n      | every 10m\n      | group_by [],\n          [value_session_events_aggregate: aggregate(value.session_events)] }\n| outer_join 0\n| div\n| add [p: 'crash ratio'] | map [p]\n| condition val() > 0.3\n",
+        "trigger": {
+          "count": 1
+        }
+      }
+    }
+  ],
+  "alertStrategy": {
+    "notificationPrompts": [
+      "OPENED"
+    ]
+  },
+  "combiner": "OR",
+  "enabled": true,
+  "severity": "ERROR"
+}

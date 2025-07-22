@@ -1,0 +1,26 @@
+{
+  "displayName": "Crashes on the UpgradePaymentActivity screen",
+  "documentation": {},
+  "userLabels": {},
+  "conditions": [
+    {
+      "displayName": "Crashes on the UpgradePaymentActivity screen",
+      "conditionSql": {
+        "minutes": {
+          "periodicity": 60
+        },
+        "query": "# Query to join crashes with analytics events\n\n# All events by eventId\n\nWITH CrashlyticsEvents AS (\nSELECT\n  timestamp, \n  JSON_VALUE(json_payload, \"$.eventId\") AS eventId, \nFROM\n  `fb-io-2024.global._Default._Default`\nWHERE\n  log_name = \"projects/fb-io-2024/logs/firebasecrashlytics.googleapis.com%2Fevents\"\n),\n\n# Events which contain the \"UpgradePaymentActivity\" analytics breadcrumb\n\nPaymentBreadcrumb AS (\nSELECT \n  MAX(timestamp),\n  JSON_VALUE(json_payload, \"$.eventId\") AS eventId,\n  \"UpgradePaymentActivity\" AS breadcrumb,\nFROM\n  `fb-io-2024.global._Default._Default`\nWHERE\n  log_name = \"projects/fb-io-2024/logs/firebasecrashlytics.googleapis.com%2Fdevice_logs\"\n  AND JSON_VALUE(json_payload, \"$.breadcrumb.params.firebase_screen_class\") = \"UpgradePaymentActivity\"\nGROUP BY eventId\n)\n\n# Join them\n\nSELECT \n* \nFROM CrashlyticsEvents\nJOIN PaymentBreadcrumb ON (CrashlyticsEvents.eventId = PaymentBreadcrumb.eventId);\n",
+        "rowCountTest": {
+          "comparison": "COMPARISON_GT",
+          "threshold": "100"
+        }
+      }
+    }
+  ],
+  "alertStrategy": {
+    "autoClose": "604800s"
+  },
+  "combiner": "AND",
+  "enabled": true
+  "severity": "ERROR"
+}
