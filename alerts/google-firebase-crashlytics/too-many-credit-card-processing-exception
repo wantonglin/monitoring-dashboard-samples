@@ -1,0 +1,25 @@
+{
+  "displayName": "Too many CreditCardProcessingException",
+  "documentation": {},
+  "userLabels": {},
+  "conditions": [
+    {
+      "displayName": "Too many CreditCardProcessingException",
+      "conditionSql": {
+        "minutes": {
+          "periodicity": 60
+        },
+        "query": "SELECT\n  timestamp,  \n  JSON_VALUE(json_payload, \"$.eventId\") AS eventId, \n  JSON_VALUE(json_payload, \"$.issue.id\") AS issueId, \n  JSON_VALUE(json_payload, \"$.issue.title\") AS issueTitle,\n  JSON_VALUE(json_payload, \"$.issue.subtitle\") AS issueSubtitle,\nFROM\n  `fb-io-2024.global._Default._Default`\nWHERE\n  log_name = \"projects/fb-io-2024/logs/firebasecrashlytics.googleapis.com%2Fevents\"\n  AND SEARCH(JSON_VALUE(json_payload, \"$.issue.subtitle\"), \"CreditCardProcessingException\");",
+        "rowCountTest": {
+          "comparison": "COMPARISON_GT",
+          "threshold": "30"
+        }
+      }
+    }
+  ],
+  "alertStrategy": {
+    "autoClose": "604800s"
+  },
+  "combiner": "AND",
+  "enabled": true
+}
