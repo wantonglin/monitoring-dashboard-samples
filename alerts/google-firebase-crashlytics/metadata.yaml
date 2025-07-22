@@ -1,0 +1,22 @@
+alert_policy_templates:
+-
+  id: too-many-credit-card-processing-exception
+  display_name: Too many CreditCardProcessingException
+  version: 1
+  related_integrations:
+    - id: fb_crashlytics
+      platform: GCP
+-
+  id: crashes-on-upgradePaymentActivity-screen
+  display_name: Crashes on the UpgradePaymentActivity screen
+  version: 1
+  related_integrations:
+    - id:  fb_crashlytics
+      platform: GCP
+-
+  id: crash-rate-above-30%
+  display_name: Crash Rate above 30%
+  version: 1
+  related_integrations:
+    - id: fb_crashlytics
+      platform: GCP
